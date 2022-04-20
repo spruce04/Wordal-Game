@@ -179,7 +179,7 @@ LetterColour4 = 'black'
 LetterColour5 = 'black'
 ComparePC()
 
-#Import 5x5 Grid
+#Import Grid
 #Import First Row
 def changeFIRSTrow () :
     global TextONEone

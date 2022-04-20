@@ -1,4 +1,4 @@
-#wordal game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt
+#wordal game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt. 
 #Place the txt file in the same location as this script and ensure it is properly named. 
 from tkinter import *
 import tkinter.font as font
@@ -58,8 +58,8 @@ def DetermineColour() :
     if FindFirstLetterA == -1 :
         LetterColour1 = 'black'
         ChosenWord1 = list(ChosenWord)
-        ChosenWord1[FindFirstLetterA] = '.'
         ChosenWord1A = ''.join(ChosenWord1)
+        print(ChosenWord1A)
     elif FindFirstLetterA == FindFirstLetterB :
          LetterColour1 = 'green'
          #Accounting for Duplicates
@@ -67,70 +67,76 @@ def DetermineColour() :
          ChosenWord1[FindFirstLetterA] = '.'
          ChosenWord1A = ''.join(ChosenWord1)
          WinCheck()
-         
+         print(ChosenWord1A)
     else :
         LetterColour1 = 'orange'
         ChosenWord1 = list(ChosenWord)
         ChosenWord1[FindFirstLetterA] = '.'
         ChosenWord1A = ''.join(ChosenWord1)
-        
+        print(ChosenWord1A)
     #Second Letter
     FindSecondLetterA = ChosenWord1A.find(PGLetter2)
     FindSecondLetterB = ChosenWord1A.find(CWLetter2)
     if FindSecondLetterA == -1  :
         LetterColour2 = 'black'
         ChosenWord2 = list(ChosenWord1A)
-        ChosenWord2[FindSecondLetterA] = '.'
         ChosenWord2A = ''.join(ChosenWord2)
+        print(ChosenWord2A)
     elif FindSecondLetterA == FindSecondLetterB :
          LetterColour2 = 'green'
          ChosenWord2 = list(ChosenWord1A)
          ChosenWord2[FindSecondLetterA] = '.'
          ChosenWord2A = ''.join(ChosenWord2)
+         print(ChosenWord2A)
          WinCheck()
     else :
         LetterColour2 = 'orange'
         ChosenWord2 = list(ChosenWord1A)
         ChosenWord2[FindSecondLetterA] = '.'
         ChosenWord2A = ''.join(ChosenWord2)
+        print(ChosenWord2A)
     #Third Letter
     FindThirdLetterA = ChosenWord2A.find(PGLetter3)
     FindThirdLetterB = ChosenWord2A.find(CWLetter3)
     if FindThirdLetterA == -1  :
         LetterColour3 = 'black'
         ChosenWord3 = list(ChosenWord2A)
-        ChosenWord3[FindThirdLetterA] = '.'
         ChosenWord3A = ''.join(ChosenWord3)
+        print(ChosenWord3A)
     elif FindThirdLetterA == FindThirdLetterB :
          LetterColour3 = 'green'
          ChosenWord3 = list(ChosenWord2A)
          ChosenWord3[FindThirdLetterA] = '.'
          ChosenWord3A = ''.join(ChosenWord3)
+         print(ChosenWord3A)
          WinCheck()
     else :
         LetterColour3 = 'orange'
         ChosenWord3 = list(ChosenWord2A)
         ChosenWord3[FindThirdLetterA] = '.'
         ChosenWord3A = ''.join(ChosenWord3)
+        print(ChosenWord3A)
     #Fourth Letter
     FindFourthLetterA = ChosenWord3A.find(PGLetter4)
     FindFourthLetterB = ChosenWord3A.find(CWLetter4)
     if FindFourthLetterA == -1  :
         LetterColour4 = 'black'
         ChosenWord4 = list(ChosenWord3A)
-        ChosenWord4[FindFourthLetterA] = '.'
         ChosenWord4A = ''.join(ChosenWord4)
+        print(ChosenWord4A)
     elif FindFourthLetterA == FindFourthLetterB :
          LetterColour4 = 'green'
          ChosenWord4 = list(ChosenWord3A)
          ChosenWord4[FindFourthLetterA] = '.'
          ChosenWord4A = ''.join(ChosenWord4)
+         print(ChosenWord4A)
          WinCheck()
     else :
         LetterColour4 = 'orange'
         ChosenWord4 = list(ChosenWord3A)
         ChosenWord4[FindFourthLetterA] = '.'
         ChosenWord4A = ''.join(ChosenWord4)
+        print(ChosenWord4A)
     #Fifth Letter
     FindFifthLetterA = ChosenWord4A.find(PGLetter5)
     FindFifthLetterB = ChosenWord4A.find(CWLetter5)
@@ -362,23 +368,18 @@ def PlayWordal() :
         if GuessCount == 5 :
             DetermineColour()
             changeFIRSTrow()
-         
         elif GuessCount == 4 :
             DetermineColour()
             changeSECONDrow()
-            
         elif GuessCount == 3 :
             DetermineColour()
             changeTHIRDrow()
-            
         elif GuessCount == 2 :
             DetermineColour()
             changeFOURTHrow()
-           
         elif GuessCount == 1 :
             DetermineColour()
             changeFIFTHrow()
-            
         elif GuessCount == 0 :
             DetermineColour()
             changeSIXTHrow()

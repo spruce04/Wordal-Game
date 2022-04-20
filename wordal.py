@@ -10,7 +10,7 @@ except :
     quit()
 
 #Setup Font
-myFont = font.Font(size=30)
+myFont = font.Font(size=60)
 
 #Comparing Player Choice and Randomly Chosen Word
 def ComparePC() :
@@ -53,51 +53,106 @@ def DetermineColour() :
     global LetterColour5
 #First Letter
     FindFirstLetterA = ChosenWord.find(PGLetter1)
-    FindFirstLetterB = PlayerGuess.find(CWLetter1)
+    FindFirstLetterB = ChosenWord.find(CWLetter1)
     if FindFirstLetterA == -1 :
-        LetterColour1 = 'grey'
+        LetterColour1 = 'black'
+        ChosenWord1 = list(ChosenWord)
+        ChosenWord1[FindFirstLetterA] = '.'
+        ChosenWord1A = ''.join(ChosenWord1)
     elif FindFirstLetterA == FindFirstLetterB :
          LetterColour1 = 'green'
+         #Accounting for Duplicates
+         ChosenWord1 = list(ChosenWord)
+         ChosenWord1[FindFirstLetterA] = '.'
+         ChosenWord1A = ''.join(ChosenWord1)
+         WinCheck()
+         
     else :
         LetterColour1 = 'orange'
+        ChosenWord1 = list(ChosenWord)
+        ChosenWord1[FindFirstLetterA] = '.'
+        ChosenWord1A = ''.join(ChosenWord1)
+        
     #Second Letter
-    FindSecondLetterA = ChosenWord.find(PGLetter2)
-    FindSecondLetterB = PlayerGuess.find(CWLetter2)
+    FindSecondLetterA = ChosenWord1A.find(PGLetter2)
+    FindSecondLetterB = ChosenWord1A.find(CWLetter2)
     if FindSecondLetterA == -1  :
-        LetterColour2 = 'grey'
+        LetterColour2 = 'black'
+        ChosenWord2 = list(ChosenWord1A)
+        ChosenWord2[FindSecondLetterA] = '.'
+        ChosenWord2A = ''.join(ChosenWord2)
     elif FindSecondLetterA == FindSecondLetterB :
          LetterColour2 = 'green'
+         ChosenWord2 = list(ChosenWord1A)
+         ChosenWord2[FindSecondLetterA] = '.'
+         ChosenWord2A = ''.join(ChosenWord2)
+         WinCheck()
     else :
         LetterColour2 = 'orange'
+        ChosenWord2 = list(ChosenWord1A)
+        ChosenWord2[FindSecondLetterA] = '.'
+        ChosenWord2A = ''.join(ChosenWord2)
     #Third Letter
-    FindThirdLetterA = ChosenWord.find(PGLetter3)
-    FindThirdLetterB = PlayerGuess.find(CWLetter3)
+    FindThirdLetterA = ChosenWord2A.find(PGLetter3)
+    FindThirdLetterB = ChosenWord2A.find(CWLetter3)
     if FindThirdLetterA == -1  :
-        LetterColour3 = 'grey'
+        LetterColour3 = 'black'
+        ChosenWord3 = list(ChosenWord2A)
+        ChosenWord3[FindThirdLetterA] = '.'
+        ChosenWord3A = ''.join(ChosenWord3)
     elif FindThirdLetterA == FindThirdLetterB :
          LetterColour3 = 'green'
+         ChosenWord3 = list(ChosenWord2A)
+         ChosenWord3[FindThirdLetterA] = '.'
+         ChosenWord3A = ''.join(ChosenWord3)
+         WinCheck()
     else :
         LetterColour3 = 'orange'
+        ChosenWord3 = list(ChosenWord2A)
+        ChosenWord3[FindThirdLetterA] = '.'
+        ChosenWord3A = ''.join(ChosenWord3)
     #Fourth Letter
-    FindFourthLetterA = ChosenWord.find(PGLetter4)
-    FindFourthLetterB = PlayerGuess.find(CWLetter4)
+    FindFourthLetterA = ChosenWord3A.find(PGLetter4)
+    FindFourthLetterB = ChosenWord3A.find(CWLetter4)
     if FindFourthLetterA == -1  :
-        LetterColour4 = 'grey'
+        LetterColour4 = 'black'
+        ChosenWord4 = list(ChosenWord3A)
+        ChosenWord4[FindFourthLetterA] = '.'
+        ChosenWord4A = ''.join(ChosenWord4)
     elif FindFourthLetterA == FindFourthLetterB :
          LetterColour4 = 'green'
+         ChosenWord4 = list(ChosenWord3A)
+         ChosenWord4[FindFourthLetterA] = '.'
+         ChosenWord4A = ''.join(ChosenWord4)
+         WinCheck()
     else :
         LetterColour4 = 'orange'
+        ChosenWord4 = list(ChosenWord3A)
+        ChosenWord4[FindFourthLetterA] = '.'
+        ChosenWord4A = ''.join(ChosenWord4)
     #Fifth Letter
-    FindFifthLetterA = ChosenWord.find(PGLetter5)
-    FindFifthLetterB = PlayerGuess.find(CWLetter5)
+    FindFifthLetterA = ChosenWord4A.find(PGLetter5)
+    FindFifthLetterB = ChosenWord4A.find(CWLetter5)
     if FindFifthLetterA == -1 :
-        LetterColour5 = 'grey'
+        LetterColour5 = 'black'
     elif FindFifthLetterA == FindFifthLetterB :
-         LetterColour5 = 'green'
+        LetterColour5 = 'green'    
+        WinCheck()
     else :
         LetterColour5 = 'orange'
     
-
+#Check for wether the player has won
+def WinCheck() :
+    global LetterColour1
+    global LetterColour2
+    global LetterColour3
+    global LetterColour4
+    global LetterColour5
+    global GuessCount
+    global Victory
+    if LetterColour1 == 'green' and LetterColour2 == 'green' and LetterColour3 == 'green' and LetterColour4 == 'green' and LetterColour5 == 'green' :
+        Victory.grid(row = 13, column = 3)
+    
 #Import the list of words to Python.
 WordBase = list()
 for word in Fopen :
@@ -108,7 +163,7 @@ GuessCount = 6
 
 #Some setup (The programn doesn't work without it.)
 PlayerGuess = '?????'
-ChosenNumber = random.randint(0,2497)
+ChosenNumber = random.randint(0,2481)
 ChosenWord = str(WordBase[ChosenNumber])
 LetterColour1 = 'black'
 LetterColour2 = 'black'
@@ -126,15 +181,15 @@ def changeFIRSTrow () :
     global TextONEfour 
     global TextONEfive
     TextONEone = '' + PGLetter1
-    LetterONEone = Button(root, text = TextONEone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 7, column = 1)
+    LetterONEone = Button(root, text = TextONEone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 7, column = 1)
     TextONEtwo = '' + PGLetter2
-    LetterONEtwo = Button(root, text = TextONEtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 7, column = 2)
+    LetterONEtwo = Button(root, text = TextONEtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 7, column = 2)
     TextONEthree = '' + PGLetter3
-    LetterONEthree = Button(root, text = TextONEthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3, bg = 'white').grid(row = 7, column = 3)
+    LetterONEthree = Button(root, text = TextONEthree, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour3).grid(row = 7, column = 3)
     TextONEfour = '' + PGLetter4
-    LetterONEfour = Button(root, text = TextONEfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 7, column = 4)
+    LetterONEfour = Button(root, text = TextONEfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 7, column = 4)
     TextONEfive = '' + PGLetter5
-    LetterONEfive = Button(root, text = TextONEfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 7, column = 5)
+    LetterONEfive = Button(root, text = TextONEfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 7, column = 5)
 #Import Second Row
 def changeSECONDrow () :
     global TextTWOone
@@ -143,15 +198,15 @@ def changeSECONDrow () :
     global TextTWOfour 
     global TextTWOfive
     TextTWOone = '' + PGLetter1
-    LetterTWOone = Button(root, text = TextTWOone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 8, column = 1)
+    LetterTWOone = Button(root, text = TextTWOone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 8, column = 1)
     TextTWOtwo = '' + PGLetter2
-    LetterTWOone = Button(root, text = TextTWOtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 8, column = 2)
+    LetterTWOone = Button(root, text = TextTWOtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 8, column = 2)
     TextTWOthree = '' + PGLetter3
-    LetterTWOthree = Button(root, text = TextTWOthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3, bg = 'white').grid(row = 8, column = 3)
+    LetterTWOthree = Button(root, text = TextTWOthree, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour3).grid(row = 8, column = 3)
     TextTWOfour = '' + PGLetter4
-    LetterTWOfour = Button(root, text = TextTWOfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 8, column = 4)
+    LetterTWOfour = Button(root, text = TextTWOfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 8, column = 4)
     TextTWOfive = '' + PGLetter5
-    LetterTWOfive = Button(root, text = TextTWOfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 8, column = 5)
+    LetterTWOfive = Button(root, text = TextTWOfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 8, column = 5)
 #Import Third Row
 def changeTHIRDrow () :
     global TextTHREEone
@@ -160,15 +215,15 @@ def changeTHIRDrow () :
     global TextTHREEfour 
     global TextTHREEfive
     TextTHREEone = '' + PGLetter1
-    LetterTHREEone = Button(root, text = TextTHREEone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 9, column = 1)
+    LetterTHREEone = Button(root, text = TextTHREEone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 9, column = 1)
     TextTHREEtwo = '' + PGLetter2
-    LetterTHREEone = Button(root, text = TextTHREEtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 9, column = 2)
+    LetterTHREEone = Button(root, text = TextTHREEtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 9, column = 2)
     TextTHREEthree = '' + PGLetter3
-    LetterTHREEthree = Button(root, text = TextTHREEthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3, bg = 'white').grid(row = 9, column = 3)
+    LetterTHREEthree = Button(root, text = TextTHREEthree, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour3).grid(row = 9, column = 3)
     TextTHREEfour = '' + PGLetter4
-    LetterTHREEfour = Button(root, text = TextTHREEfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 9, column = 4)
+    LetterTHREEfour = Button(root, text = TextTHREEfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 9, column = 4)
     TextTHREEfive = '' + PGLetter5
-    LetterTHREEfive = Button(root, text = TextTHREEfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 9, column = 5)
+    LetterTHREEfive = Button(root, text = TextTHREEfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 9, column = 5)
 #Import Fourth Row
 def changeFOURTHrow () :
     global TextFOURone
@@ -177,15 +232,15 @@ def changeFOURTHrow () :
     global TextFOURfour 
     global TextFOURfive
     TextFOURone = '' + PGLetter1
-    LetterFOURone = Button(root, text = TextFOURone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 10, column = 1)
+    LetterFOURone = Button(root, text = TextFOURone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 10, column = 1)
     TextFOURtwo = '' + PGLetter2
-    LetterFOURone = Button(root, text = TextFOURtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 10, column = 2)
+    LetterFOURone = Button(root, text = TextFOURtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 10, column = 2)
     TextFOURthree = '' + PGLetter3
-    LetterFOURthree = Button(root, text = TextFOURthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3, bg = 'white').grid(row = 10, column = 3)
+    LetterFOURthree = Button(root, text = TextFOURthree, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour3).grid(row = 10, column = 3)
     TextFOURfour = '' + PGLetter4
-    LetterFOURfour = Button(root, text = TextFOURfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 10, column = 4)
+    LetterFOURfour = Button(root, text = TextFOURfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 10, column = 4)
     TextFOURfive = '' + PGLetter5
-    LetterFOURfive = Button(root, text = TextFOURfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 10, column = 5)
+    LetterFOURfive = Button(root, text = TextFOURfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 10, column = 5)
 #Import Fifth Row
 def changeFIFTHrow () :
     global TextFIVEone
@@ -194,15 +249,15 @@ def changeFIFTHrow () :
     global TextFIVEfour 
     global TextFIVEfive
     TextFIVEone = '' + PGLetter1
-    LetterFIVEone = Button(root, text = TextFIVEone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 11, column = 1)
+    LetterFIVEone = Button(root, text = TextFIVEone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 11, column = 1)
     TextFIVEtwo = '' + PGLetter2
-    LetterFIVEone = Button(root, text = TextFIVEtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 11, column = 2)
+    LetterFIVEone = Button(root, text = TextFIVEtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 11, column = 2)
     TextFIVEthree = '' + PGLetter3
-    LetterFIVEthree = Button(root, text = TextFIVEthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3, bg = 'white').grid(row = 11, column = 3)
+    LetterFIVEthree = Button(root, text = TextFIVEthree, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour3).grid(row = 11, column = 3)
     TextFIVEfour = '' + PGLetter4
-    LetterFIVEfour = Button(root, text = TextFIVEfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 11, column = 4)
+    LetterFIVEfour = Button(root, text = TextFIVEfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 11, column = 4)
     TextFIVEfive = '' + PGLetter5
-    LetterFIVEfive = Button(root, text = TextFIVEfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 11, column = 5)
+    LetterFIVEfive = Button(root, text = TextFIVEfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 11, column = 5)
 #Import Sixth  Row
 def changeSIXTHrow () :
     global TextSIXone
@@ -211,15 +266,15 @@ def changeSIXTHrow () :
     global TextSIXfour 
     global TextSIXfive
     TextSIXone = '' + PGLetter1
-    LetterSIXone = Button(root, text = TextSIXone, borderwidth = 5, height = 6, width = 16, fg = LetterColour1, bg = 'white').grid(row = 12, column = 1)
+    LetterSIXone = Button(root, text = TextSIXone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 12, column = 1)
     TextSIXtwo = '' + PGLetter2
-    LetterSIXone = Button(root, text = TextSIXtwo, borderwidth = 5, height = 6, width = 16, fg = LetterColour2, bg = 'white').grid(row = 12, column = 2)
+    LetterSIXone = Button(root, text = TextSIXtwo, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour2).grid(row = 12, column = 2)
     TextSIXthree = '' + PGLetter3
-    LetterSIXthree = Button(root, text = TextSIXthree, borderwidth = 5, height = 6, width = 16, fg = LetterColour3,  bg = 'white').grid(row = 12, column = 3)
+    LetterSIXthree = Button(root, text = TextSIXthree, borderwidth = 5, height = 6, width = 16, fg = 'white',  bg = LetterColour3).grid(row = 12, column = 3)
     TextSIXfour = '' + PGLetter4
-    LetterSIXfour = Button(root, text = TextSIXfour, borderwidth = 5, height = 6, width = 16, fg = LetterColour4, bg = 'white').grid(row = 12, column = 4)
+    LetterSIXfour = Button(root, text = TextSIXfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 12, column = 4)
     TextSIXfive = '' + PGLetter5
-    LetterSIXfive = Button(root, text = TextSIXfive, borderwidth = 5, height = 6, width = 16, fg = LetterColour5, bg = 'white').grid(row = 12, column = 5)
+    LetterSIXfive = Button(root, text = TextSIXfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 12, column = 5)
 
 #Resetting the game function
 def BackgroundSetup():
@@ -235,13 +290,26 @@ def BackgroundSetup():
     global CWLetter3
     global CWLetter4
     global CWLetter5
+    global LetterColour1
+    global LetterColour2 
+    global LetterColour3 
+    global LetterColour4 
+    global LetterColour5
+    global Victory
     #Choosing a random word. 
     ChosenNumber = random.randint(0,2497)
     ChosenWord = WordBase[ChosenNumber] 
+    #Reset grid Colours
+    LetterColour1 = 'black'
+    LetterColour2 = 'black'
+    LetterColour3 = 'black'
+    LetterColour4 = 'black'
+    LetterColour5 = 'black'
     
     #Reset Guesses
     GuessCount = 6
     Invalid_Guess.grid_remove()
+    Victory.grid_remove()
     PGLetter1 = ''
     PGLetter2 = ''
     PGLetter3 = ''
@@ -312,13 +380,12 @@ def PlayWordal() :
         elif GuessCount == 0 :
             DetermineColour()
             changeSIXTHrow()
-        elif GuessCount == -1 :
-            BackgroundSetup()
-
+            
 #Importing GUI
 root.title("Wordal")
 Invalid_Guess = Label(root, text = "Enter a 5 Letter Word.", fg = 'red')
 Invalid_Guess.grid(row = 3, column = 4)
+Victory = Label(root, text = 'Victory!')
 BackgroundSetup()
 greeting = Label(text = "Welcome to Wordal.")
 greeting.grid(row = 1, column = 1)

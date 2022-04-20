@@ -382,7 +382,7 @@ greeting = Label(text = "Welcome to Wordal.")
 greeting.grid(row = 1, column = 1)
 ButtonGuess = Button(root, text = 'Reset', borderwidth = 3, height = 2, width = 10, command = BackgroundSetup)
 ButtonGuess.grid(row = 1, column = 3)
-CreditDue = Label(root, text = "Made by Sam Flax")
+CreditDue = Label(root, text = "Made by Spruce04")
 CreditDue.grid(row = 1, column = 5)
 
 #Guess Box

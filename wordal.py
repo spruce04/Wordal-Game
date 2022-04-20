@@ -362,22 +362,23 @@ def PlayWordal() :
         if GuessCount == 5 :
             DetermineColour()
             changeFIRSTrow()
-            print(ChosenWord)
+         
         elif GuessCount == 4 :
             DetermineColour()
             changeSECONDrow()
-            print(ChosenWord)
+            
         elif GuessCount == 3 :
             DetermineColour()
             changeTHIRDrow()
-            print(ChosenWord)
+            
         elif GuessCount == 2 :
             DetermineColour()
             changeFOURTHrow()
-            print(ChosenWord)
+           
         elif GuessCount == 1 :
             DetermineColour()
             changeFIFTHrow()
+            
         elif GuessCount == 0 :
             DetermineColour()
             changeSIXTHrow()

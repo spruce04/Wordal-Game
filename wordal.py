@@ -1,4 +1,4 @@
-#wordal game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt. 
+#wordal game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt
 #Place the txt file in the same location as this script and ensure it is properly named. 
 from tkinter import *
 import tkinter.font as font

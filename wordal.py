@@ -326,26 +326,6 @@ def BackgroundSetup():
 def PlayWordal() :
     global GuessCount
     global PlayerGuess
-    global PGLetter1
-    global PGLetter2
-    global PGLetter3
-    global PGLetter4
-    global PGLetter5
-    global CWLetter1
-    global CWLetter2
-    global CWLetter3
-    global CWLetter4
-    global CWLetter5
-    global TextONEone
-    global TextONEtwo
-    global TextONEthree
-    global TextONEfour
-    global TextONEfive
-    global LetterColour1
-    global LetterColour2 
-    global LetterColour3 
-    global LetterColour4 
-    global LetterColour5
     GuessCount = GuessCount-1
     PlayerGuess = GuessSpace.get().upper() 
     if len(PlayerGuess) != 5 :

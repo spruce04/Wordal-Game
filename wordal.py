@@ -1,4 +1,4 @@
-#wordal game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt
+#wordle game. to play the game, you must also download the 5LetterWords.txt file from https://github.com/spruce04/Wordal-Game/blob/main/5LetterWords.txt
 #Place the txt file in the same location as this script and ensure it is properly named. 
 from tkinter import *
 import tkinter.font as font
@@ -32,13 +32,13 @@ def ComparePC() :
     global LetterColour3 
     global LetterColour4 
     global LetterColour5
-    #Extract the positions and letters of PlayerGuess
+#Extract the positions and letters of PlayerGuess
     PGLetter1 = PlayerGuess[0]
     PGLetter2 = PlayerGuess[1]
     PGLetter3 = PlayerGuess[2]
     PGLetter4 = PlayerGuess[3]
     PGLetter5 = PlayerGuess[4]
-    #Extract the positions and letters of ChosenWord
+#Extract the positions and letters of ChosenWord
     CWLetter1 = ChosenWord[0]
     CWLetter2 = ChosenWord[1]
     CWLetter3 = ChosenWord[2]
@@ -52,88 +52,142 @@ def DetermineColour() :
     global LetterColour3
     global LetterColour4
     global LetterColour5
-#First Letter
+    global DefeatWord
+#Setup neccesary Variables
+    LetterColour1 = 'black'
+    LetterColour2 = 'black'
+    LetterColour3 = 'black'
+    LetterColour4 = 'black'
+    LetterColour5 = 'black'
+#Firstly, check if any of the letters are in the exact position
     FindFirstLetterA = ChosenWord.find(PGLetter1)
     FindFirstLetterB = ChosenWord.find(CWLetter1)
-    if FindFirstLetterA == -1 :
-        LetterColour1 = 'black'
-        ChosenWord1 = list(ChosenWord)
-        ChosenWord1A = ''.join(ChosenWord1)
-    elif FindFirstLetterA == FindFirstLetterB :
-         LetterColour1 = 'green'
-         #Accounting for Duplicates
-         ChosenWord1 = list(ChosenWord)
-         ChosenWord1[FindFirstLetterA] = '.'
-         ChosenWord1A = ''.join(ChosenWord1)
-         WinCheck()
-    else :
-        LetterColour1 = 'orange'
-        ChosenWord1 = list(ChosenWord)
+    ChosenWord1 = list(ChosenWord)
+    DefeatWord = ''.join(ChosenWord1)
+    if FindFirstLetterA == FindFirstLetterB and FindFirstLetterA != -1 :
+        LetterColour1 = 'green'
+#Accounting for Duplicates
         ChosenWord1[FindFirstLetterA] = '.'
         ChosenWord1A = ''.join(ChosenWord1)
-    #Second Letter
-    FindSecondLetterA = ChosenWord1A.find(PGLetter2)
-    FindSecondLetterB = ChosenWord1A.find(CWLetter2)
-    if FindSecondLetterA == -1  :
-        LetterColour2 = 'black'
-        ChosenWord2 = list(ChosenWord1A)
-        ChosenWord2A = ''.join(ChosenWord2)
-    elif FindSecondLetterA == FindSecondLetterB :
-         LetterColour2 = 'green'
-         ChosenWord2 = list(ChosenWord1A)
-         ChosenWord2[FindSecondLetterA] = '.'
-         ChosenWord2A = ''.join(ChosenWord2)
-         WinCheck()
-    else :
-        LetterColour2 = 'orange'
-        ChosenWord2 = list(ChosenWord1A)
-        ChosenWord2[FindSecondLetterA] = '.'
-        ChosenWord2A = ''.join(ChosenWord2)
-    #Third Letter
-    FindThirdLetterA = ChosenWord2A.find(PGLetter3)
-    FindThirdLetterB = ChosenWord2A.find(CWLetter3)
-    if FindThirdLetterA == -1  :
-        LetterColour3 = 'black'
-        ChosenWord3 = list(ChosenWord2A)
-        ChosenWord3A = ''.join(ChosenWord3)
-    elif FindThirdLetterA == FindThirdLetterB :
-         LetterColour3 = 'green'
-         ChosenWord3 = list(ChosenWord2A)
-         ChosenWord3[FindThirdLetterA] = '.'
-         ChosenWord3A = ''.join(ChosenWord3)
-         WinCheck()
-    else :
-        LetterColour3 = 'orange'
-        ChosenWord3 = list(ChosenWord2A)
-        ChosenWord3[FindThirdLetterA] = '.'
-        ChosenWord3A = ''.join(ChosenWord3)
-    #Fourth Letter
-    FindFourthLetterA = ChosenWord3A.find(PGLetter4)
-    FindFourthLetterB = ChosenWord3A.find(CWLetter4)
-    if FindFourthLetterA == -1  :
-        LetterColour4 = 'black'
-        ChosenWord4 = list(ChosenWord3A)
-        ChosenWord4A = ''.join(ChosenWord4)
-    elif FindFourthLetterA == FindFourthLetterB :
-         LetterColour4 = 'green'
-         ChosenWord4 = list(ChosenWord3A)
-         ChosenWord4[FindFourthLetterA] = '.'
-         ChosenWord4A = ''.join(ChosenWord4)
-         WinCheck()
-    else :
-        LetterColour4 = 'orange'
-        ChosenWord4 = list(ChosenWord3A)
-        ChosenWord4[FindFourthLetterA] = '.'
-        ChosenWord4A = ''.join(ChosenWord4)
-    #Fifth Letter
-    FindFifthLetterA = ChosenWord4A.find(PGLetter5)
-    FindFifthLetterB = ChosenWord4A.find(CWLetter5)
-    if FindFifthLetterA == -1 :
-        LetterColour5 = 'black'
-    elif FindFifthLetterA == FindFifthLetterB :
-        LetterColour5 = 'green'    
         WinCheck()
     else :
+        ChosenWord1A = ''.join(ChosenWord1)
+        
+#Second Letter
+    FindSecondLetterA = ChosenWord1A.find(PGLetter2)
+    FindSecondLetterB = ChosenWord1A.find(CWLetter2)
+    ChosenWord2 = list(ChosenWord1A)
+    if FindSecondLetterA == FindSecondLetterB and FindSecondLetterA != -1 :
+        LetterColour2 = 'green'
+        ChosenWord2[FindSecondLetterA] = '.'
+        ChosenWord2A = ''.join(ChosenWord2)
+        WinCheck()
+    else :
+        ChosenWord2A = ''.join(ChosenWord1A)
+#Third Letter
+    FindThirdLetterA = ChosenWord2A.find(PGLetter3)
+    FindThirdLetterB = ChosenWord2A.find(CWLetter3)
+    ChosenWord3 = list(ChosenWord2A)
+    if FindThirdLetterA == FindThirdLetterB and FindThirdLetterA != -1 :
+        LetterColour3 = 'green'
+        ChosenWord3[FindThirdLetterA] = '.'
+        ChosenWord3A = ''.join(ChosenWord3)
+        WinCheck()
+    else :
+        ChosenWord3A = ''.join(ChosenWord2A)
+#Fourth Letter
+    FindFourthLetterA = ChosenWord3A.find(PGLetter4)
+    FindFourthLetterB = ChosenWord3A.find(CWLetter4)
+    ChosenWord4 = list(ChosenWord3A)
+    if FindFourthLetterA == FindFourthLetterB and FindFourthLetterA != -1 :
+        LetterColour4 = 'green'
+        ChosenWord4[FindFourthLetterA] = '.'
+        ChosenWord4A = ''.join(ChosenWord4)
+        WinCheck()
+    else :
+        ChosenWord4A = ''.join(ChosenWord3A)
+#Fifth Letter
+    FindFifthLetterA = ChosenWord4A.find(PGLetter5)
+    FindFifthLetterB = ChosenWord4A.find(CWLetter5)
+    ChosenWord5 = list(ChosenWord4A)
+    if FindFifthLetterA == FindFifthLetterB and FindFifthLetterA != -1 :
+        LetterColour5 = 'green'   
+        ChosenWord5[FindFifthLetterA] = '.' 
+        ChosenWord5A = ''.join(ChosenWord5)
+        WinCheck()
+    else :
+        ChosenWord5A = ''.join(ChosenWord5)
+#Check if the remaining letters are in the word or not
+#First Letter
+    FindFirstLetterC = ChosenWord5A.find(PGLetter1)
+    FindFirstLetterD = ChosenWord5A.find(CWLetter1)
+    ChosenWord6 = list(ChosenWord5A)
+    if FindFirstLetterC == -1 and LetterColour1 != 'green' :
+        LetterColour1 = 'black'
+        ChosenWord6A = ''.join(ChosenWord6)
+    else :
+        ChosenWord6A = ''.join(ChosenWord6)
+    ChosenWord7 = list(ChosenWord6A)
+    if FindFirstLetterC != -1 and FindFirstLetterC != FindFirstLetterD :
+        LetterColour1 = 'orange'
+        ChosenWord7[FindFirstLetterA] = '.'
+        ChosenWord7A = ''.join(ChosenWord7)
+    else :
+       ChosenWord7A = ''.join(ChosenWord7) 
+#Second Letter
+    FindSecondLetterC = ChosenWord7A.find(PGLetter2)
+    FindSecondLetterD = ChosenWord7A.find(CWLetter2)
+    ChosenWord8 = list(ChosenWord7A)
+    if FindSecondLetterC == -1 and LetterColour2 != 'green' :
+        LetterColour2 = 'black'
+        ChosenWord8A = ''.join(ChosenWord8)
+    else :
+        ChosenWord8A = ''.join(ChosenWord8)
+    ChosenWord9 = list(ChosenWord8A)
+    if FindSecondLetterC != -1 and FindSecondLetterC != FindSecondLetterD :
+        LetterColour2 = 'orange'
+        ChosenWord9[FindSecondLetterA] = '.'
+        ChosenWord9A = ''.join(ChosenWord9)
+    else :
+        ChosenWord9A = ''.join(ChosenWord9)
+#Third Letter
+    FindThirdLetterC = ChosenWord9A.find(PGLetter3)
+    FindThirdLetterD = ChosenWord9A.find(CWLetter3)
+    ChosenWord10 = list(ChosenWord9A)
+    if FindThirdLetterC == -1 and LetterColour3 != 'green' :
+        LetterColour3 = 'black'
+        ChosenWord10A = ''.join(ChosenWord10)
+    else :
+        ChosenWord10A = ''.join(ChosenWord10)
+    ChosenWord11 = list(ChosenWord10A)
+    if FindThirdLetterC != -1 and FindThirdLetterC != FindThirdLetterD :
+        LetterColour3 = 'orange'
+        ChosenWord11[FindThirdLetterA] = '.'
+        ChosenWord11A = ''.join(ChosenWord11)
+    else :
+        ChosenWord11A = ''.join(ChosenWord11)
+#Fourth Letter
+    FindFourthLetterC = ChosenWord11A.find(PGLetter4)
+    FindFourthLetterD = ChosenWord11A.find(CWLetter4)
+    ChosenWord12 = list(ChosenWord11A)
+    if FindFourthLetterC == -1 and LetterColour4 != 'green' :
+        LetterColour4 = 'black'
+        ChosenWord12A = ''.join(ChosenWord12)
+    else :
+        ChosenWord12A = ''.join(ChosenWord12)
+    ChosenWord13 = list(ChosenWord12A)
+    if FindFourthLetterC != -1 and FindFourthLetterC != FindFourthLetterD :
+        LetterColour4 = 'orange'
+        ChosenWord13[FindFourthLetterA] = '.'
+        ChosenWord13A = ''.join(ChosenWord13)
+    else :
+        ChosenWord13A = ''.join(ChosenWord13)
+#Fifth Letter
+    FindFifthLetterC = ChosenWord13A.find(PGLetter5)
+    FindFifthLetterD = ChosenWord13A.find(CWLetter5)
+    if FindFifthLetterC == -1 and LetterColour5 != 'green':
+        LetterColour5 = 'black'
+    if FindFifthLetterC != -1 and FindFifthLetterC != FindFifthLetterD :
         LetterColour5 = 'orange'
     
 #Check for wether the player has won
@@ -143,23 +197,38 @@ def WinCheck() :
     global LetterColour3
     global LetterColour4
     global LetterColour5
-    global GuessCount
     global Victory
+    global GuessCount
+    global win
     if LetterColour1 == 'green' and LetterColour2 == 'green' and LetterColour3 == 'green' and LetterColour4 == 'green' and LetterColour5 == 'green' :
+        win = True
         Victory.grid(row = 13, column = 3)
-    
+
+def LossCheck() : 
+    global DefeatText
+    global Defeat
+    global GuessCount
+    global win
+    global DefeatWord
+    if GuessCount == 0 and win is False :
+        DefeatText = f'The word was {DefeatWord}'
+        Defeat = Label(root, text = DefeatText)
+        Defeat.grid(row = 13, column = 3)
+
 #Import the list of words to Python.
 WordBase = list()
 for word in Fopen :
     word1 = word.upper()
     wordA = word1.split()
     WordBase = WordBase + wordA
-GuessCount = 6
 
 #Some setup (The programn doesn't work without it.)
+win = False
+GuessCount = 6
 PlayerGuess = '?????'
 ChosenNumber = random.randint(0,2481)
 ChosenWord = str(WordBase[ChosenNumber])
+DefeatWord = ''
 LetterColour1 = 'black'
 LetterColour2 = 'black'
 LetterColour3 = 'black'
@@ -260,6 +329,8 @@ def changeSIXTHrow () :
     global TextSIXthree
     global TextSIXfour 
     global TextSIXfive
+    global GuessCount
+    global playerloss
     TextSIXone = '' + PGLetter1
     LetterSIXone = Button(root, text = TextSIXone, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour1).grid(row = 12, column = 1)
     TextSIXtwo = '' + PGLetter2
@@ -270,6 +341,8 @@ def changeSIXTHrow () :
     LetterSIXfour = Button(root, text = TextSIXfour, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour4).grid(row = 12, column = 4)
     TextSIXfive = '' + PGLetter5
     LetterSIXfive = Button(root, text = TextSIXfive, borderwidth = 5, height = 6, width = 16, fg = 'white', bg = LetterColour5).grid(row = 12, column = 5)
+    if GuessCount == 0 :
+        playerloss = True
 
 #Resetting the game function
 def BackgroundSetup():
@@ -291,9 +364,13 @@ def BackgroundSetup():
     global LetterColour4 
     global LetterColour5
     global Victory
+    global Defeat
+    global DefeatText
+    global win
     #Choosing a random word. 
     ChosenNumber = random.randint(0,2497)
-    ChosenWord = WordBase[ChosenNumber] 
+    ChosenWord = str(WordBase[ChosenNumber])
+    DefeatText = ChosenWord
     #Reset grid Colours
     LetterColour1 = 'black'
     LetterColour2 = 'black'
@@ -302,9 +379,11 @@ def BackgroundSetup():
     LetterColour5 = 'black'
     
     #Reset Guesses
+    win = False
     GuessCount = 6
     Invalid_Guess.grid_remove()
     Victory.grid_remove()
+    Defeat.grid_remove()
     PGLetter1 = ''
     PGLetter2 = ''
     PGLetter3 = ''
@@ -351,12 +430,16 @@ def PlayWordal() :
         elif GuessCount == 0 :
             DetermineColour()
             changeSIXTHrow()
+            LossCheck()
+
             
 #Importing GUI
 root.title("Wordal")
 Invalid_Guess = Label(root, text = "Enter a 5 Letter Word.", fg = 'red')
 Invalid_Guess.grid(row = 3, column = 4)
 Victory = Label(root, text = 'Victory!')
+DefeatText = f'The word was {DefeatWord}'
+Defeat = Label(root, textvariable = DefeatText)
 BackgroundSetup()
 greeting = Label(text = "Welcome to Wordal.")
 greeting.grid(row = 1, column = 1)

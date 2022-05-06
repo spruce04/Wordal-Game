@@ -4,11 +4,12 @@ from tkinter import *
 import tkinter.font as font
 root = Tk()
 import random
-try : 
-    Fopen = open('5LetterWords.txt') 
-except :
-    print('5LetterWords.txt could not be found. Please ensure that you have downloaded and properly names the file from github, and that it is placed in the same folder as wordal.py')
-    quit()
+import urllib.request
+try:
+   with urllib.request.urlopen('https://raw.githubusercontent.com/spruce04/Wordal-Game/main/5LetterWords.txt') as f:
+    Wopen = f.read().decode('utf-8').split()
+except urllib.error.URLError as e:
+   print(e.reason)
 
 #Setup Font
 myFont = font.Font(size=60)
@@ -59,6 +60,7 @@ def DetermineColour() :
     LetterColour3 = 'black'
     LetterColour4 = 'black'
     LetterColour5 = 'black'
+    print(ChosenWord)
 #Firstly, check if any of the letters are in the exact position
     FindFirstLetterA = ChosenWord.find(PGLetter1)
     FindFirstLetterB = ChosenWord.find(CWLetter1)
@@ -217,10 +219,10 @@ def LossCheck() :
 
 #Import the list of words to Python.
 WordBase = list()
-for word in Fopen :
-    word1 = word.upper()
-    wordA = word1.split()
-    WordBase = WordBase + wordA
+for word in Wopen:
+    word1 = word.upper().split()
+    WordBase = WordBase + word1
+
 
 #Some setup (The programn doesn't work without it.)
 win = False
